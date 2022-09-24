@@ -49,5 +49,5 @@
 > - Move backend server to Serverless Function / Lambda to increase scalability
 > - Dockerize the frontend app to make it portable
 > - References:
-  - https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs
-  - https://rsbh.dev/blog/dockerize-react-app
+>  - https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs
+>  - https://rsbh.dev/blog/dockerize-react-app
