@@ -1,0 +1,25 @@
+{
+  "name": "demyst-backend",
+  "version": "1.0.0",
+  "description": "demo backend server",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/by1991/demyst-test.git"
+  },
+  "author": "by1991",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/by1991/demyst-test/issues"
+  },
+  "homepage": "https://github.com/by1991/demyst-test#readme",
+  "dependencies": {
+    "chai": "^4.3.6",
+    "express": "^4.18.1",
+    "mocha": "^10.0.0",
+    "request": "^2.88.2"
+  }
+}
