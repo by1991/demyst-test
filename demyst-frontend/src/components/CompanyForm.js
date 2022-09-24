@@ -8,14 +8,21 @@ import {
     Button
 } from '@mui/material';
 import { Grid } from "@mui/material";
+import { getData, postData } from '../helpers/ApiHelper';
+import '../App.css';
+import BalanceSheet from "./BalanceSheet";
 
-const MaterialFormComponent = (props) => {
+
+const CompanyForm = (props) => {
     const initialValues = {
         companyName: "",
+        year: 2000,
         amount: 0,
         provider: "Xero",
     };
     const [formValues, setFormValues] = useState(initialValues);
+    const [balanceSheet, setBalanceSheet] = useState([]);
+    const [finalDecision, setFinalDecision] = useState(null);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -27,14 +34,52 @@ const MaterialFormComponent = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        console.log(formValues);
 
         if (formValues.companyName.replace(/ /g, '') == '') {
             alert("Please provide a valid company name");
         } else if (formValues.amount <= 0) {
             alert("Please provide a valid loan amount");
+        } else {
+            getData('/getBalanceSheet').then(
+                (result) => {
+                    if (result) {
+                        console.log(result);
+                        setBalanceSheet(result);
+                    }
+                },
+                (error) => {
+                    console.log(error);
+                    alert("Server error, please try again!");
+                }
+            );
         }
+    };
 
-        console.log(formValues);
+    const confirm = () => {
+        if (formValues.companyName.replace(/ /g, '') == '') {
+            alert("Please provide a valid company name");
+        } else if (parseFloat(formValues.amount) <= 0) {
+            alert("Please provide a valid loan amount");
+        } else {
+            postData('/requestDecision', {
+                BalanceSheet: balanceSheet,
+                CompanyName: formValues.companyName,
+                RequestedAmount: parseFloat(formValues.amount),
+                YearEstablished: formValues.year
+            }).then(
+                (result) => {
+                    if (result) {
+                        console.log(result);
+                        setFinalDecision(result);
+                    }
+                },
+                (error) => {
+                    console.log(error);
+                    alert("Server error, please try again!");
+                }
+            );
+        }
     };
 
     return (
@@ -48,6 +93,17 @@ const MaterialFormComponent = (props) => {
                             label="Company Name"
                             type="text"
                             value={formValues.companyName}
+                            onChange={handleInputChange}
+                        />
+                    </Grid>
+                    <p></p>
+                    <Grid item>
+                        <TextField
+                            id="year"
+                            name="year"
+                            label="Year Established"
+                            type="number"
+                            value={formValues.year}
                             onChange={handleInputChange}
                         />
                     </Grid>
@@ -91,7 +147,25 @@ const MaterialFormComponent = (props) => {
                     </Grid>
                 </Grid>
             </form>
+            {balanceSheet && balanceSheet.length > 0 &&
+                <div>
+                    <hr className="separater" />
+                    <h2>Balance Sheet:</h2>
+                    <BalanceSheet balanceSheet={balanceSheet} />
+                    <h2>Please review above information and click Confirm button to proceed</h2>
+                    <Button variant="contained" color="primary" type="submit" onClick={confirm}>
+                        Confirm
+                    </Button>
+                </div>
+            }
+            {finalDecision &&
+                <div>
+                    <hr className="separater" />
+                    <h2>Fianl Result: Loan Approved Amount is {finalDecision.ApprovedLoanAmount}</h2>
+                </div>
+            }
         </>
     );
 }
-export default MaterialFormComponent;
+
+export default CompanyForm;

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Button } from '@mui/material';
 import './App.css';
-import MaterialFormComponent from './components/MaterialFormComponent';
+import CompanyForm from './components/CompanyForm';
 import { getData } from './helpers/ApiHelper';
 
 function App() {
@@ -41,13 +41,14 @@ function App() {
       {isStarted &&
         <div>
           <h2 className="title">Your application id is {applicationId}, please fill in below form to request balance sheet.</h2>
-          <MaterialFormComponent />
+          <CompanyForm />
         </div>
       }
       
-      <div>
-
-      </div>
+      <footer>
+        <hr className="separater"></hr>
+        <h3 className="title">Demyst Data Demo App</h3>
+      </footer>
     </div>
   );
 }
