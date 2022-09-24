@@ -37,104 +37,324 @@ describe("Web Server API Tests", function () {
 
   // test /requestDecision API
   describe("Request Decision API", function () {
-    var data = {
-      "BalanceSheet": [
-        {
-          "year": 2022,
-          "month": 8,
-          "profitOrLoss": 250000,
-          "assetsValue": 1234
-        },
-        {
-          "year": 2022,
-          "month": 7,
-          "profitOrLoss": 1150,
-          "assetsValue": 5789
-        },
-        {
-          "year": 2022,
-          "month": 6,
-          "profitOrLoss": 2500,
-          "assetsValue": 22345
-        },
-        {
-          "year": 2022,
-          "month": 5,
-          "profitOrLoss": -187000,
-          "assetsValue": 223452
-        },
-        {
-          "year": 2022,
-          "month": 4,
-          "profitOrLoss": 250000,
-          "assetsValue": 1234
-        },
-        {
-          "year": 2022,
-          "month": 3,
-          "profitOrLoss": 1150,
-          "assetsValue": 5789
-        },
-        {
-          "year": 2022,
-          "month": 2,
-          "profitOrLoss": 2500,
-          "assetsValue": 22345
-        },
-        {
-          "year": 2022,
-          "month": 1,
-          "profitOrLoss": -187000,
-          "assetsValue": 223452
-        },
-        {
-          "year": 2021,
-          "month": 12,
-          "profitOrLoss": 250000,
-          "assetsValue": 1234
-        },
-        {
-          "year": 2021,
-          "month": 11,
-          "profitOrLoss": 1150,
-          "assetsValue": 5789
-        },
-        {
-          "year": 2021,
-          "month": 10,
-          "profitOrLoss": 2500,
-          "assetsValue": 22345
-        },
-        {
-          "year": 2021,
-          "month": 9,
-          "profitOrLoss": -187000,
-          "assetsValue": 223452
-        },
-        {
-          "year": 2021,
-          "month": 8,
-          "profitOrLoss": 1150,
-          "assetsValue": 5789
-        },
-        {
-          "year": 2021,
-          "month": 7,
-          "profitOrLoss": 2500,
-          "assetsValue": 22345
-        },
-        {
-          "year": 2021,
-          "month": 6,
-          "profitOrLoss": -187000,
-          "assetsValue": 223452
-        }
-      ],
-      "CompanyName": "test",
-      "RequestedAmount": 63204,
-      "YearEstablished": 2000
-    };
-    it("it should return the final decision", function (done) {
+
+    it("it should return the final decision with 20% requested amount", function (done) {
+      var data = {
+        "BalanceSheet": [
+          {
+            "year": 2022,
+            "month": 8,
+            "profitOrLoss": -250000,
+            "assetsValue": 1234
+          },
+          {
+            "year": 2022,
+            "month": 7,
+            "profitOrLoss": 1150,
+            "assetsValue": 5789
+          },
+          {
+            "year": 2022,
+            "month": 6,
+            "profitOrLoss": 2500,
+            "assetsValue": 22345
+          },
+          {
+            "year": 2022,
+            "month": 5,
+            "profitOrLoss": -187000,
+            "assetsValue": 223452
+          },
+          {
+            "year": 2022,
+            "month": 4,
+            "profitOrLoss": -250000,
+            "assetsValue": 1234
+          },
+          {
+            "year": 2022,
+            "month": 3,
+            "profitOrLoss": 1150,
+            "assetsValue": 5789
+          },
+          {
+            "year": 2022,
+            "month": 2,
+            "profitOrLoss": 2500,
+            "assetsValue": 22345
+          },
+          {
+            "year": 2022,
+            "month": 1,
+            "profitOrLoss": -187000,
+            "assetsValue": 223452
+          },
+          {
+            "year": 2021,
+            "month": 12,
+            "profitOrLoss": -250000,
+            "assetsValue": 1234
+          },
+          {
+            "year": 2021,
+            "month": 11,
+            "profitOrLoss": 1150,
+            "assetsValue": 5789
+          },
+          {
+            "year": 2021,
+            "month": 10,
+            "profitOrLoss": 2500,
+            "assetsValue": 22345
+          },
+          {
+            "year": 2021,
+            "month": 9,
+            "profitOrLoss": -187000,
+            "assetsValue": 223452
+          },
+          {
+            "year": 2021,
+            "month": 8,
+            "profitOrLoss": 1150,
+            "assetsValue": 5789
+          },
+          {
+            "year": 2021,
+            "month": 7,
+            "profitOrLoss": 2500,
+            "assetsValue": 22345
+          },
+          {
+            "year": 2021,
+            "month": 6,
+            "profitOrLoss": -187000,
+            "assetsValue": 223452
+          }
+        ],
+        "CompanyName": "test",
+        "RequestedAmount": 70000,
+        "YearEstablished": 2000
+      };
+
+      chai.request(server)
+        .post('/requestDecision')
+        .send(data)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(JSON.parse(res.text).ApprovedLoanAmount).to.equal(14000);
+          done();
+        });
+    });
+
+    it("it should return the final decision with 60% requested amount", function (done) {
+      var data = {
+        "BalanceSheet": [
+          {
+            "year": 2022,
+            "month": 8,
+            "profitOrLoss": 250000,
+            "assetsValue": 1234
+          },
+          {
+            "year": 2022,
+            "month": 7,
+            "profitOrLoss": 1150,
+            "assetsValue": 5789
+          },
+          {
+            "year": 2022,
+            "month": 6,
+            "profitOrLoss": 2500,
+            "assetsValue": 22345
+          },
+          {
+            "year": 2022,
+            "month": 5,
+            "profitOrLoss": -187000,
+            "assetsValue": 223452
+          },
+          {
+            "year": 2022,
+            "month": 4,
+            "profitOrLoss": 250000,
+            "assetsValue": 1234
+          },
+          {
+            "year": 2022,
+            "month": 3,
+            "profitOrLoss": 1150,
+            "assetsValue": 5789
+          },
+          {
+            "year": 2022,
+            "month": 2,
+            "profitOrLoss": 2500,
+            "assetsValue": 22345
+          },
+          {
+            "year": 2022,
+            "month": 1,
+            "profitOrLoss": -187000,
+            "assetsValue": 223452
+          },
+          {
+            "year": 2021,
+            "month": 12,
+            "profitOrLoss": 250000,
+            "assetsValue": 1234
+          },
+          {
+            "year": 2021,
+            "month": 11,
+            "profitOrLoss": 1150,
+            "assetsValue": 5789
+          },
+          {
+            "year": 2021,
+            "month": 10,
+            "profitOrLoss": 2500,
+            "assetsValue": 22345
+          },
+          {
+            "year": 2021,
+            "month": 9,
+            "profitOrLoss": -187000,
+            "assetsValue": 223452
+          },
+          {
+            "year": 2021,
+            "month": 8,
+            "profitOrLoss": 1150,
+            "assetsValue": 5789
+          },
+          {
+            "year": 2021,
+            "month": 7,
+            "profitOrLoss": 2500,
+            "assetsValue": 22345
+          },
+          {
+            "year": 2021,
+            "month": 6,
+            "profitOrLoss": -187000,
+            "assetsValue": 223452
+          }
+        ],
+        "CompanyName": "test",
+        "RequestedAmount": 70000,
+        "YearEstablished": 2000
+      };
+
+      chai.request(server)
+        .post('/requestDecision')
+        .send(data)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(JSON.parse(res.text).ApprovedLoanAmount).to.equal(42000);
+          done();
+        });
+    });
+
+    it("it should return the final decision with 100% requested amount", function (done) {
+      var data = {
+        "BalanceSheet": [
+          {
+            "year": 2022,
+            "month": 8,
+            "profitOrLoss": 250000,
+            "assetsValue": 1234
+          },
+          {
+            "year": 2022,
+            "month": 7,
+            "profitOrLoss": 1150,
+            "assetsValue": 5789
+          },
+          {
+            "year": 2022,
+            "month": 6,
+            "profitOrLoss": 2500,
+            "assetsValue": 22345
+          },
+          {
+            "year": 2022,
+            "month": 5,
+            "profitOrLoss": -187000,
+            "assetsValue": 223452
+          },
+          {
+            "year": 2022,
+            "month": 4,
+            "profitOrLoss": 250000,
+            "assetsValue": 1234
+          },
+          {
+            "year": 2022,
+            "month": 3,
+            "profitOrLoss": 1150,
+            "assetsValue": 5789
+          },
+          {
+            "year": 2022,
+            "month": 2,
+            "profitOrLoss": 2500,
+            "assetsValue": 22345
+          },
+          {
+            "year": 2022,
+            "month": 1,
+            "profitOrLoss": -187000,
+            "assetsValue": 223452
+          },
+          {
+            "year": 2021,
+            "month": 12,
+            "profitOrLoss": 250000,
+            "assetsValue": 1234
+          },
+          {
+            "year": 2021,
+            "month": 11,
+            "profitOrLoss": 1150,
+            "assetsValue": 5789
+          },
+          {
+            "year": 2021,
+            "month": 10,
+            "profitOrLoss": 2500,
+            "assetsValue": 22345
+          },
+          {
+            "year": 2021,
+            "month": 9,
+            "profitOrLoss": -187000,
+            "assetsValue": 223452
+          },
+          {
+            "year": 2021,
+            "month": 8,
+            "profitOrLoss": 1150,
+            "assetsValue": 5789
+          },
+          {
+            "year": 2021,
+            "month": 7,
+            "profitOrLoss": 2500,
+            "assetsValue": 22345
+          },
+          {
+            "year": 2021,
+            "month": 6,
+            "profitOrLoss": -187000,
+            "assetsValue": 223452
+          }
+        ],
+        "CompanyName": "test",
+        "RequestedAmount": 63204,
+        "YearEstablished": 2000
+      };
+
       chai.request(server)
         .post('/requestDecision')
         .send(data)
