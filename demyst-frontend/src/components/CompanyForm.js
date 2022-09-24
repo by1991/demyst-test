@@ -41,7 +41,8 @@ const CompanyForm = (props) => {
         } else if (formValues.amount <= 0) {
             alert("Please provide a valid loan amount");
         } else {
-            getData('/getBalanceSheet').then(
+            getData('/getBalanceSheet?provider=' + formValues.provider+ '&companyName=' + formValues.companyName)
+            .then(
                 (result) => {
                     if (result) {
                         console.log(result);
