@@ -30,7 +30,7 @@
 > Use ReactJs and Material UI to develop the frontend application
 - /demyst-frontend/src/App.js implements the main app
 - /demyst-frontend/src/helpers implements helper functions and constants
-- /demyst-frontend/src/components implements components for balance sheet and form display
+- /demyst-frontend/src/components implements function components for balance sheet and form display
 
 ## Backend Implementation
 > Follow test-driven development practice by creating unit tests before implementing the API server
