@@ -1,21 +1,19 @@
 # Demyst Data Exercise
 
 ## Prerequisites
-- Install NodeJs v16
+- Install Docker (https://www.docker.com)
 
 ## Run Program
-- Run Backend Server (URL: http://localhost:4000):
-  - `cd demyst-backend`
-  - `npm install`
-  - `node app/server.js`
-- Run Frontend (URl: http://localhost:3000):
-  - `cd demyst-frontend`
-  - `npm install`
-  - `npm start`
+- Pull My Docker Repository (https://hub.docker.com/r/bduaa/demyst/tags)
+  - docker pull bduaa/demyst:demyst-frontend
+  - docker pull bduaa/demyst:demyst-backend
+  - then run both images
+- Or run `docker-compose up` under root filder to build and run both images
+- Navigate to http://localhost:3000
 - Run Backend Server Unit Tests:
-  - run `npm test` command under demyst-backend folder
+  - run `npm install` `npm test` command under demyst-backend folder
 - Run Frontend Unit Tests:
-  - run `npm test` command under demyst-frontend folder
+  - run `npm install` `npm test` command under demyst-frontend folder
 
 ## User Guide
 - 1. Click 'Start Application' button:
@@ -47,7 +45,7 @@
 
 ## Scalability Improvements
 > - Move backend server to Serverless Function / Lambda to increase scalability
-> - Dockerize the frontend app to make it portable
+> - Use Kubernetes for automating deployment, scaling, and management of the containerized applications
 > - References:
 >  - https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs
->  - https://rsbh.dev/blog/dockerize-react-app
+>  - https://kubernetes.io/

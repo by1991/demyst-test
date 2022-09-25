@@ -1,9 +1,10 @@
-var express = require("express");
-var cors = require("cors");
-var accountingService = require('./accounting');
-var decisionEngine = require('./decision');
-var app = express();
+const express = require("express");
+const cors = require("cors");
+const accountingService = require('./accounting');
+const decisionEngine = require('./decision');
+const app = express();
 
+const PORT = 4000;
 
 // configure cors
 app.use(cors());
@@ -101,9 +102,9 @@ function preAssess(balanceSheet, requestedAmount) {
 
 
 // start server at port 4000
-let port = 4000;
-app.listen(port);
-console.log("Listening on port " + port);
+app.listen(PORT, () => {
+    console.log("Listening on port " + PORT);
+});
 
 
 module.exports = app; // for testing
