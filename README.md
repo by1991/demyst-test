@@ -4,9 +4,9 @@
 - Install Docker (https://www.docker.com)
 
 ## Run Program
-- Pull My Docker Repository (https://hub.docker.com/r/bduaa/demyst/tags)
-  - docker pull bduaa/demyst:demyst-frontend
-  - docker pull bduaa/demyst:demyst-backend
+- Pull from my Docker Hub Repository (https://hub.docker.com/r/bduaa/demyst/tags)
+  - run `docker pull bduaa/demyst:demyst-frontend`
+  - run `docker pull bduaa/demyst:demyst-backend`
   - then run both images
 - Or run `docker-compose up` under root filder to build and run both images
 - Navigate to http://localhost:3000
