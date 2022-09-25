@@ -8,7 +8,7 @@
   - run `docker pull bduaa/demyst:demyst-frontend`
   - run `docker pull bduaa/demyst:demyst-backend`
   - then run both images
-- Or run `docker-compose up` under root filder to build and run both images
+- Or run `docker-compose up` under root folder to build and run both images
 - Navigate to http://localhost:3000
 - Run Backend Server Unit Tests:
   - run `npm install` `npm test` command under demyst-backend folder
