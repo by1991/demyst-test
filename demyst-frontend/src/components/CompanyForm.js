@@ -162,7 +162,7 @@ const CompanyForm = (props) => {
             {finalDecision &&
                 <div>
                     <hr className="separater" />
-                    <h2>Fianl Result: Loan Approved Amount is {finalDecision.ApprovedLoanAmount}</h2>
+                    <h2>Final Result: Loan Approved Amount is {finalDecision.ApprovedLoanAmount}</h2>
                 </div>
             }
         </>
